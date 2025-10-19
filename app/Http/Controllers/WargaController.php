@@ -1,0 +1,95 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Warga;
+use Illuminate\Http\Request;
+
+class WargaController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        $data['dataWarga'] = Warga::all();
+		return view('guest.warga.data-warga',$data);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        return view('guest.warga.create-warga');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        
+        $validated = $request->validate([
+            'no_ktp'        => 'required|string|max:20|unique:warga,no_ktp',
+            'nama'          => 'required|string|max:100',
+            'jenis_kelamin' => 'required|in:Laki-laki, Perempuan',
+            'agama'         => 'required|string|max:50',
+            'pekerjaan'     => 'nullable|string|max:100',
+            'telp'          => 'nullable|string|max:20',
+            'email'         => 'nullable|email|max:100',
+        ]);
+
+        $warga = Warga::create($validated);
+        return redirect()->route('warga.index')->with('success','Penambahan Data Berhasil!');
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        $data['dataWarga'] = Warga::findOrFail($id);
+    return view('guest.warga.edit-warga', $data);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        $warga_id = $id;
+    $warga = Warga::findOrFail($warga_id);
+
+    $warga->no_ktp = $request->no_ktp;
+    $warga->nama = $request->nama;
+    $warga->jenis_kelamin = $request->jenis_kelamin;
+    $warga->agama = $request->agama;
+    $warga->pekerjaan = $request->pekerjaan;
+    $warga->telp = $request->telp;
+    $warga->email = $request->email;
+
+    $warga->save();
+
+    return redirect()->route('warga.index')->with('success', 'Perubahan Data Warga Berhasil!');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        $warga = Warga::findOrFail($id);
+
+    $warga->delete();
+    return redirect()->route('warga.index')->with('success', 'Data warga berhasil dihapus');
+    }
+}

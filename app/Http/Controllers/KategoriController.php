@@ -2,16 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kategori;
 use Illuminate\Http\Request;
 
-class AuthController extends Controller
+class KategoriController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('logform');
+        $data['dataKategori'] = Kategori::all();
+		return view('guest.kategori.data-kategori',$data);
     }
 
     /**
@@ -19,7 +21,7 @@ class AuthController extends Controller
      */
     public function create()
     {
-        //
+        return view('guest.kategori.create-kategori');
     }
 
     /**
@@ -27,21 +29,12 @@ class AuthController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-    'username' => 'required|max:10',
-    'password' => 'required|min:3|regex:/[A-Z]/',
-], [
-    'username.required' => 'Username tidak boleh kosong',
-    'username.max' => 'Username maksimal 20 karakter',
-    'password.required' => 'Password tidak boleh kosong',
-    'password.min' => 'Password minimal 3 karakter',
-    'password.regex' => 'Password harus mengandung setidaknya satu huruf kapital'
-]);
-
-    $data['username'] = $request->username;
-    $data['password'] = $request->password;
-
-return view('guest.dashboard', $data);
+        $validated = $request->validate([
+            'nama' => 'required|string|max:100',
+            'deskripsi' => 'nullable|string',
+        ]);
+        $kategori = Kategori::create($validated);
+        return redirect()->route('kategori.index')->with('success', 'Data berhasil ditambahkan!');
     }
 
     /**
@@ -73,6 +66,9 @@ return view('guest.dashboard', $data);
      */
     public function destroy(string $id)
     {
-        //
+        $kategori = Kategori::findOrFail($id);
+
+    $kategori->delete();
+    return redirect()->route('kategori.index')->with('success', 'Data warga berhasil dihapus');
     }
 }
