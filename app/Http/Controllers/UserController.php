@@ -2,18 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Warga;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
-class WargaController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $data['dataWarga'] = Warga::all();
-		return view('guest.warga.data-warga',$data);
+        $data['dataUser'] = User::all();
+        return view('guest.user.data-user',$data);
+
     }
 
     /**
@@ -21,7 +23,7 @@ class WargaController extends Controller
      */
     public function create()
     {
-        return view('guest.warga.create-warga');
+        return view('guest.user.create-user');
     }
 
     /**
@@ -29,19 +31,16 @@ class WargaController extends Controller
      */
     public function store(Request $request)
     {
-        
+        //
         $validated = $request->validate([
-            'no_ktp'        => 'required|string|max:20|unique:warga,no_ktp',
-            'nama'          => 'required|string|max:100',
-            'jenis_kelamin' => 'required|in:Laki-laki,Perempuan',
-            'agama'         => 'required|string|max:50',
-            'pekerjaan'     => 'nullable|string|max:100',
-            'telp'          => 'nullable|string|max:20',
-            'email'         => 'nullable|email|max:100',
+            'name'     => 'required|string|max:20|',
+            'email'    => 'required|string|max:100',
+            'password' => 'required|string|max:20', Hash::make($request->password),
+
         ]);
 
-        $warga = Warga::create($validated);
-        return redirect()->route('warga.index')->with('success','Penambahan Data Berhasil!');
+        $user = User::create($validated);
+        return redirect()->route('user.index')->with('success', 'Penambahan Data Berhasil!');
     }
 
     /**
@@ -57,7 +56,7 @@ class WargaController extends Controller
      */
     public function edit(string $id)
     {
-     
+        //
     }
 
     /**
@@ -65,7 +64,7 @@ class WargaController extends Controller
      */
     public function update(Request $request, string $id)
     {
-
+        //
     }
 
     /**
@@ -73,6 +72,6 @@ class WargaController extends Controller
      */
     public function destroy(string $id)
     {
-
+        //
     }
 }

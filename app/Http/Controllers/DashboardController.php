@@ -2,18 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Warga;
 use Illuminate\Http\Request;
 
-class WargaController extends Controller
+class DashboardController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $data['dataWarga'] = Warga::all();
-		return view('guest.warga.data-warga',$data);
+        return view ('guest.dashboard');
     }
 
     /**
@@ -21,7 +19,7 @@ class WargaController extends Controller
      */
     public function create()
     {
-        return view('guest.warga.create-warga');
+        //
     }
 
     /**
@@ -29,19 +27,7 @@ class WargaController extends Controller
      */
     public function store(Request $request)
     {
-        
-        $validated = $request->validate([
-            'no_ktp'        => 'required|string|max:20|unique:warga,no_ktp',
-            'nama'          => 'required|string|max:100',
-            'jenis_kelamin' => 'required|in:Laki-laki,Perempuan',
-            'agama'         => 'required|string|max:50',
-            'pekerjaan'     => 'nullable|string|max:100',
-            'telp'          => 'nullable|string|max:20',
-            'email'         => 'nullable|email|max:100',
-        ]);
-
-        $warga = Warga::create($validated);
-        return redirect()->route('warga.index')->with('success','Penambahan Data Berhasil!');
+        //
     }
 
     /**
@@ -57,7 +43,7 @@ class WargaController extends Controller
      */
     public function edit(string $id)
     {
-     
+        //
     }
 
     /**
@@ -65,7 +51,7 @@ class WargaController extends Controller
      */
     public function update(Request $request, string $id)
     {
-
+        //
     }
 
     /**
@@ -73,6 +59,6 @@ class WargaController extends Controller
      */
     public function destroy(string $id)
     {
-
+        //
     }
 }

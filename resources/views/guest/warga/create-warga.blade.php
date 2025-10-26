@@ -1,147 +1,67 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Responsive Admin & Dashboard Template based on Bootstrap 5">
-    <meta name="author" content="AdminKit">
-    <meta name="keywords"
-        content="adminkit, bootstrap, admin, dashboard, template, responsive">
-
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link rel="shortcut icon" href="{{ asset('assets/assets-admin/img/icons/icon-48x48.png') }}" />
-    <title>Input Data Warga | AdminKit Demo</title>
-
-    <link href="{{ asset('assets/assets-admin/css/app.css') }}" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-</head>
-
-<body>
-    <div class="wrapper">
-        <!-- Sidebar -->
-        <nav id="sidebar" class="sidebar js-sidebar">
-            <div class="sidebar-content js-simplebar">
-                <a class="sidebar-brand" href="#">
-                    <span class="align-middle">AdminKit</span>
-                </a>
-
-                <ul class="sidebar-nav">
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="{{ url ('guest.dashboard') }}">
-                            <i class="align-middle" data-feather="sliders"></i> 
-                            <span class="align-middle">Dashboard</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-item active">
-                        <a class="sidebar-link" href="{{ route('warga.index') }}">
-                            <i class="align-middle" data-feather="users"></i> 
-                            <span class="align-middle">Data Warga</span>
-                        </a>
-                    </li>
-                     <li class="sidebar-item active">
-                        <a class="sidebar-link" href="{{ route('kategori.index') }}">
-                            <i class="align-middle" data-feather="users"></i> 
-                            <span class="align-middle">Kategori</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-
-        <!-- Main -->
-        <div class="main">
-            <nav class="navbar navbar-expand navbar-light navbar-bg">
-                <a class="sidebar-toggle js-sidebar-toggle">
-                    <i class="hamburger align-self-center"></i>
-                </a>
-            </nav>
-
-            <main class="content">
-                <div class="container-fluid p-0">
-
-                    <div class="mb-3">
-                        <h1 class="h3 d-inline align-middle">Input Data Warga</h1>
-                        <a href="{{ route('warga.index') }}" class="btn btn-secondary btn-sm ms-2">Lihat Data</a>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-12 col-lg-6">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5 class="card-title mb-0">Form Input</h5>
-                                </div>
-
-                                <form action="{{ route('warga.store') }}" method="POST">
-                                    @csrf
-                                    <div class="card-body">
-                                        <label>No KTP</label>
-                                        <input type="text" class="form-control" placeholder="Masukkan No KTP"
-                                            name="no_ktp" value="{{ old('no_ktp') }}">
-                                    </div>
-
-                                    <div class="card-body">
-                                        <label>Nama</label>
-                                        <input type="text" class="form-control" placeholder="Masukkan Nama"
-                                            name="nama" value="{{ old('nama') }}">
-                                    </div>
-
-                                    <div class="card-body">
-                                        <label for="jenis_kelamin">Jenis Kelamin</label>
-                                        <select name="jenis_kelamin" class="form-select">
-                                            <option value="">-- Pilih --</option>
-                                            <option value="Laki-laki">Laki-laki</option>
-                                            <option value="Perempuan">Perempuan</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="card-body">
-                                        <label>Agama</label>
-                                        <input type="text" class="form-control" placeholder="Masukkan Agama"
-                                            name="agama" value="{{ old('agama') }}">
-                                    </div>
-
-                                    <div class="card-body">
-                                        <label>Pekerjaan</label>
-                                        <input type="text" class="form-control" placeholder="Masukkan Pekerjaan"
-                                            name="pekerjaan" value="{{ old('pekerjaan') }}">
-                                    </div>
-
-                                    <div class="card-body">
-                                        <label>No Telepon</label>
-                                        <input type="text" class="form-control" placeholder="Masukkan No Telepon"
-                                            name="telp" value="{{ old('telp') }}">
-                                    </div>
-
-                                    <div class="card-body">
-                                        <label>Email</label>
-                                        <input type="email" class="form-control" placeholder="Masukkan Email"
-                                            name="email" value="{{ old('email') }}">
-                                    </div>
-
-                                    <div class="card-body">
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                        <a href="{{ route('warga.index') }}" class="btn btn-danger">Cancel</a>
-                                    </div>
-                                </form>
-
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </main>
-
-            <footer class="footer">
-                <div class="container-fluid text-center">
-                    <span class="text-muted">© 2025 AdminKit Laravel Template</span>
-                </div>
-            </footer>
+@extends('layouts.admin.app')
+@section('content')
+    <!-- ========================= HERO SECTION ========================= -->
+        <section id="form" class="pt-100 pb-100 bg-light">
+      <div class="container">
+        <div class="section-title text-center mb-5">
+          <h2 class="fw-bold">Form Input Data Warga</h2>
+          <p class="text-muted">Isi data berikut untuk menambahkan warga baru ke sistem Bina Desa.</p>
         </div>
-    </div>
 
-    <script src="{{ asset('assets/assets-admin/js/app.js') }}"></script>
-</body>
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <div class="card shadow border-0 p-4">
+              <form action="{{ route('warga.store') }}" method="POST">
+                @csrf
 
-</html>
+                <div class="mb-3">
+                  <label for="no_ktp" class="form-label fw-bold">Nomor KTP</label>
+                  <input type="text" name="no_ktp" id="no_ktp" class="form-control" placeholder="Masukkan nomor KTP" value="{{ old('no_ktp') }}" required>
+                </div>
+
+                <div class="mb-3">
+                  <label for="nama" class="form-label fw-bold">Nama Lengkap</label>
+                  <input type="text" name="nama" id="nama" class="form-control" placeholder="Masukkan nama warga" value="{{ old('nama') }}" required>
+                </div>
+
+                <div class="mb-3">
+                  <label for="jenis_kelamin" class="form-label fw-bold">Jenis Kelamin</label>
+                  <select name="jenis_kelamin" id="jenis_kelamin" class="form-select" required>
+                    <option value="">-- Pilih Jenis Kelamin --</option>
+                    <option value="Laki-laki">Laki-laki</option>
+                    <option value="Perempuan">Perempuan</option>
+                  </select>
+                </div>
+
+                <div class="mb-3">
+                  <label for="agama" class="form-label fw-bold">Agama</label>
+                  <input type="text" name="agama" id="agama" class="form-control" placeholder="Masukkan Agama" value="{{ old('agama') }}" required>
+                </div>
+
+                <div class="mb-3">
+                  <label for="pekerjaan" class="form-label fw-bold">Pekerjaan</label>
+                  <input type="text" name="pekerjaan" id="pekerjaan" class="form-control" placeholder="Masukkan pekerjaan" value="{{ old('pekerjaan') }}" required>
+                </div>
+
+                <div class="mb-3">
+                  <label for="telp" class="form-label fw-bold">Nomor Telepon</label>
+                  <input type="text" name="telp" id="telp" class="form-control" placeholder="Masukkan nomor telepon" value="{{ old('telp') }}" required>
+                </div>
+
+                <div class="mb-3">
+                  <label for="email" class="form-label fw-bold">Email</label>
+                  <input type="email" name="email" id="email" class="form-control" placeholder="Masukkan alamat email" value="{{ old('email') }}" required>
+                </div>
+
+                <div class="text-center">
+                  <button type="submit" class="main-btn btn-hover">Simpan Data</button>
+                  <button type="reset" class="main-btn btn-outline-secondary ms-2">Reset</button>
+                </div>
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+ @endsection
