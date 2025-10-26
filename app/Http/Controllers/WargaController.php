@@ -29,7 +29,7 @@ class WargaController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $validated = $request->validate([
             'no_ktp'        => 'required|string|max:20|unique:warga,no_ktp',
             'nama'          => 'required|string|max:100',
@@ -57,7 +57,7 @@ class WargaController extends Controller
      */
     public function edit(string $id)
     {
-     
+
     }
 
     /**

@@ -1,59 +1,51 @@
 @extends('layouts.admin.app')
 @section('content')
     <!-- ========================= HERO SECTION ========================= -->
+    <br><br>
     <main class="container my-5" id="warga">
-    <div class="text-center mb-4">
-      <h2 class="fw-bold">Data Warga Desa</h2>
-      <p class="text-muted">Berikut adalah daftar warga yang telah terdaftar dalam sistem Bina Desa.</p>
-    </div>
-    <div>
-                            @if (session('success'))
-                                <div class="alert alert-success">
-                                    {{ session('success') }}
-                                </div>
-                            @endif
+        <div class="text-center mb-4">
+            <h2 class="fw-bold">Data Warga Desa</h2>
+            <p class="text-muted">Berikut adalah daftar warga yang telah terdaftar dalam sistem Bina Desa.</p>
+        </div>
+
+        {{-- ✅ Notifikasi sukses --}}
+        @if (session('success'))
+            <div class="alert alert-success text-center">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        {{-- ✅ Jika data ada --}}
+        @if (!$dataWarga->isEmpty())
+            <div class="row g-4">
+                @foreach ($dataWarga as $item)
+                    <div class="col-md-4 col-sm-6">
+                        <div class="card shadow-sm border-0 rounded-4 h-100">
+                            <div class="card-body">
+                                <h5 class="card-title fw-bold">{{ $item->nama }}</h5>
+                                <p class="card-text mb-1"><strong>No. KTP:</strong> {{ $item->no_ktp }}</p>
+                                <p class="card-text mb-1"><strong>Jenis Kelamin:</strong> {{ $item->jenis_kelamin }}</p>
+                                <p class="card-text mb-1"><strong>Agama:</strong> {{ $item->agama }}</p>
+                                <p class="card-text mb-1"><strong>Pekerjaan:</strong> {{ $item->pekerjaan }}</p>
+                                <p class="card-text mb-1"><strong>Telepon:</strong> {{ $item->telp }}</p>
+                                <p class="card-text mb-0"><strong>Email:</strong> {{ $item->email }}</p>
+                            </div>
                         </div>
-    <div class="card shadow-lg border-0 rounded-3">
-      <div class="card-body">
-        <div class="table-responsive">
-          <table class="table table-hover align-middle">
-            <thead class="table-primary text-center">
-              <tr>
-                <th>No. KTP</th>
-                <th>Nama</th>
-                <th>Jenis Kelamin</th>
-                <th>Agama</th>
-                <th>Pekerjaan</th>
-                <th>Telepon</th>
-                <th>Email</th>
-              </tr>
-            </thead>
-            <tbody>
-              @foreach($dataWarga as $item)
-              <tr>
-                <td>{{ $item->no_ktp }}</td>
-                <td>{{ $item->nama }}</td>
-                <td>{{ $item->jenis_kelamin }}</td>
-                <td>{{ $item->agama }}</td>
-                <td>{{ $item->pekerjaan }}</td>
-                <td>{{ $item->telp }}</td>
-                <td>{{ $item->email }}</td>
-              </tr>
-              @endforeach
+                    </div>
+                @endforeach
+            </div>
+        @else
+            {{-- ✅ Jika data kosong --}}
+            <div class="text-center text-muted mt-4">
+                <p>Belum ada data warga yang dimasukkan.</p>
+            </div>
+        @endif
 
-              @if($dataWarga->isEmpty())
-              <tr>
-                <td colspan="9" class="text-center text-muted">Belum ada data warga yang dimasukkan.</td>
-              </tr>
-              @endif
-            </tbody>
-          </table>
+        <div class="text-end mt-4">
+            <a href="{{ route('warga.create') }}" class="btn btn-primary shadow-sm rounded-pill px-4 py-2">
+                + Tambah Data Warga
+            </a>
         </div>
+    </main>
 
-        <div class="text-end mt-3">
-          <a href="{{ route('warga.create') }}" class="btn btn-primary btn-hover">+ Tambah Data Warga</a>
-        </div>
-      </div>
-    </div>
-  </main>
 @endsection

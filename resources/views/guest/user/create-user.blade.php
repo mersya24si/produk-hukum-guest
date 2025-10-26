@@ -19,7 +19,7 @@
                 </div>
                 <div class="mb-3">
                   <label for="email" class="form-label fw-bold">Email</label>
-                  <input type="email" name="" id="agama" class="form-control" placeholder="Masukkan Email" value="{{ old('email') }}" required>
+                  <input type="email" name="email" id="email" class="form-control" placeholder="Masukkan Email" value="{{ old('email') }}" required>
                 </div>
                 <div class="mb-3">
                   <label for="password" class="form-label fw-bold">Password</label>
