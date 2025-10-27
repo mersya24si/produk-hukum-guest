@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    @include('layouts.admin.csslog')
+    @include('layouts.guest.csslog')
 </head>
 <body>
 

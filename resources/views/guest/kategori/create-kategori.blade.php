@@ -1,4 +1,4 @@
-@extends('layouts.admin.app')
+@extends('layouts.guest.app')
 @section('content')
     <!-- ========================= HERO SECTION ========================= -->
     <section id="form" class="pt-100 pb-100 bg-light">

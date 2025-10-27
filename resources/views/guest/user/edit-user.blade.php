@@ -1,4 +1,4 @@
-@extends('layouts.admin.app')
+@extends('layouts.guest.app')
 
 @section('content')
 <section id="edit-user" class="pt-100 pb-100 bg-light">

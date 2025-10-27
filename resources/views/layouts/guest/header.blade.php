@@ -5,7 +5,7 @@
                 <div class="col-lg-12">
                     <nav class="navbar navbar-expand-lg">
                         <a class="navbar-brand" href="{{ route('dashboard.index') }}">
-                            <img src="{{ asset('assets/assets-admin/img/about/logo_about.png') }}" alt="Logo"
+                            <img src="{{ asset('assets/assets-guest/img/about/logo_about.png') }}" alt="Logo"
                                 width="60" style="height: auto;" />
                         </a>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
