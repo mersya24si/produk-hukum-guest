@@ -19,8 +19,7 @@
                             Platform digital untuk pengelolaan, publikasi, dan dokumentasi produk hukum desa secara
                             mudah, cepat, dan transparan.
                         </p>
-                        <a href="#about" class="main-btn btn-hover wow fadeInUp" data-wow-delay=".8s">Pelajari Lebih
-                            Lanjut</a>
+                        <a href="#about" class="main-btn btn-hover wow fadeInUp" data-wow-delay=".8s">Halaman Selanjutnya</a>
                     </div>
                 </div>
                 <div class="col-lg-6">

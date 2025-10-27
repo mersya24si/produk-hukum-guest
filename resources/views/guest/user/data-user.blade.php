@@ -1,7 +1,7 @@
 @extends('layouts.admin.app')
 @section('content')
     <!-- ========================= HERO SECTION ========================= -->
-    <br><br>    
+    <br><br>
     <main class="container my-5" id="user">
         <div class="text-center mb-4">
             <h2 class="fw-bold">Data User</h2>
@@ -31,6 +31,16 @@
                                 <p class="card-text text-muted"><strong>Password (hashed):</strong><br>
                                     <code>{{ Str::limit($item->password, 20, '...') }}</code>
                                 </p>
+                            </div>
+                            <div class="mt-3 d-flex justify-content-between">
+                                <a href="{{ route('user.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
+
+                                <form action="{{ route('user.destroy', $item->id) }}" method="POST"
+                                    onsubmit="return confirm('Yakin hapus data ini?')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                                </form>
                             </div>
                         </div>
                     </div>
