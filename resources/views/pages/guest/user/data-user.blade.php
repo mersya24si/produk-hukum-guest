@@ -1,4 +1,4 @@
-@extends('layouts.admin.app')
+@extends('layouts.guest.app')
 @section('content')
     <!-- ========================= HERO SECTION ========================= -->
     <br><br>

@@ -1,4 +1,4 @@
-@extends('layouts.admin.app')
+@extends('layouts.guest.app')
 @section('content')
     <!-- ========================= HERO SECTION ========================= -->
     <section id="home" class="hero-section">
@@ -24,7 +24,7 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="hero-img wow fadeInUp" data-wow-delay=".5s">
-                        <img src="{{ asset('assets/assets-admin/img/hero/hero-img.svg') }}" alt="Hero Image">
+                        <img src="{{ asset('assets/assets-guest/img/hero/hero-img.svg') }}" alt="Hero Image">
                     </div>
                 </div>
             </div>
@@ -37,7 +37,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-6 mb-4 mb-lg-0">
                     <div class="about-img wow fadeInLeft" data-wow-delay=".3s">
-                        <img src="{{ asset('assets/assets-admin/img/about/logo_about.png') }}"
+                        <img src="{{ asset('assets/assets-guest/img/about/logo_about.png') }}"
                             alt="Tentang Produk Hukum Desa" class="img-fluid rounded">
                     </div>
                 </div>

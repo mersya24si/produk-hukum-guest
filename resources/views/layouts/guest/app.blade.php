@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html class="no-js" lang="id">
 
-@include('layouts.admin.css')
+@include('layouts.guest.css')
 
 <body>
     <!-- ========================= HEADER ========================= -->
-    @include('layouts.admin.header')
+    @include('layouts.guest.header')
     <!-- ========================= MAIN CONTENT ========================= -->
     @yield('content')
     <!-- ========================= FOOTER ========================= -->
-    @include('layouts.admin.footer')
+    @include('layouts.guest.footer')
     <!-- ========================= JS ========================= -->
-	@include('layouts.admin.js')
+	@include('layouts.guest.js')
 </body>
 </html>

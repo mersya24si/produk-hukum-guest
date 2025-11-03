@@ -25,3 +25,6 @@ Route::get('/jenis-dokumen', [JenisDokumenController::class, 'index']);
 
 Route::get('/auth', [AuthController::class, 'index'])->name('auth.index');
 Route::post('/auth/store', [AuthController::class, 'store'])->name('auth.store');
+
+
+
