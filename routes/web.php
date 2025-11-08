@@ -21,7 +21,7 @@ Route::resource('warga', WargaController::class);
 Route::resource('dashboard', DashboardController::class);
 Route::resource('user', UserController::class);
 
-Route::get('/jenis-dokumen', [JenisDokumenController::class, 'index']);
+
 
 Route::get('/auth', [AuthController::class, 'index'])->name('auth.index');
 Route::post('/auth/store', [AuthController::class, 'store'])->name('auth.store');
