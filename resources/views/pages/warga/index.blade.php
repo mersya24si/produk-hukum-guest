@@ -30,6 +30,16 @@
                                 <p class="card-text mb-1"><strong>Telepon:</strong> {{ $item->telp }}</p>
                                 <p class="card-text mb-0"><strong>Email:</strong> {{ $item->email }}</p>
                             </div>
+                            <div class="mt-3 d-flex justify-content-between">
+                                <a href="{{ route('warga.edit', $item->warga_id) }}" class="btn btn-warning btn-sm">Edit</a>
+
+                                <form action="{{ route('warga.destroy', $item->warga_id) }}" method="POST"
+                                    onsubmit="return confirm('Yakin hapus data ini?')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 @endforeach

@@ -4,7 +4,6 @@
 
     @include('layouts.auth.css')
 
-    @include('layouts.guest.csslog')
 </head>
 <body>
 

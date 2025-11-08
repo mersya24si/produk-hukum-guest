@@ -28,7 +28,17 @@
                             <div class="card-body">
                                 <h5 class="card-title fw-bold text-primary">{{ $item->nama }}</h5>
                                 <p class="card-text text-muted">{{ $item->deskripsi ?: 'Tidak ada deskripsi.' }}</p>
-                            </div>
+                                                       <div class="mt-3 d-flex justify-content-between">
+                                <a href="{{ route('kategori.edit', $item->kategori_id) }}" class="btn btn-warning btn-sm">Edit</a>
+
+                                <form action="{{ route('kategori.destroy', $item->kategori_id) }}" method="POST"
+                                    onsubmit="return confirm('Yakin hapus data ini?')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                                </form>
+                            </div> </div>
+
                         </div>
                     </div>
                 @endforeach

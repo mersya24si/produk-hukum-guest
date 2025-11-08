@@ -48,9 +48,10 @@ class KategoriController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+        public function edit(string $id)
     {
-        //
+        $data['dataKategori'] = Kategori::findOrFail($id);
+        return view('pages.kategori.edit', $data);
     }
 
     /**
@@ -58,7 +59,15 @@ class KategoriController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validated = $request->validate([
+            'nama' => 'required|string|max:100',
+            'deskripsi' => 'nullable|string',
+        ]);
+
+        $kategori = Kategori::findOrFail($id);
+        $kategori->update($validated);
+
+        return redirect()->route('kategori.index')->with('success', 'Data kategori berhasil diperbarui!');
     }
 
     /**
@@ -66,6 +75,10 @@ class KategoriController extends Controller
      */
     public function destroy(string $id)
     {
-    
+        $kategori = Kategori::findOrFail($id);
+        $kategori->delete();
+
+        return redirect()->route('kategori.index')->with('success', 'Data kategori berhasil dihapus!');
     }
 }
+
