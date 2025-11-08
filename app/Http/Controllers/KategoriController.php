@@ -13,7 +13,7 @@ class KategoriController extends Controller
     public function index()
     {
         $data['dataKategori'] = Kategori::all();
-		return view('guest.kategori.data-kategori',$data);
+		return view('pages.kategori.index',$data);
     }
 
     /**
@@ -21,7 +21,7 @@ class KategoriController extends Controller
      */
     public function create()
     {
-        return view('guest.kategori.create-kategori');
+        return view('pages.kategori.create');
     }
 
     /**

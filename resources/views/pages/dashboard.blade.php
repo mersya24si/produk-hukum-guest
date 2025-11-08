@@ -104,4 +104,53 @@
             </div>
         </div>
     </section>
+        <!-- ========================= KONTAK SECTION ========================= -->
+    <section id="kontak" class="contact-section pt-100 pb-100 bg-light">
+        <div class="container">
+            <div class="section-title text-center mb-5">
+                <h2 class="fw-bold">Kontak Kami</h2>
+                <p class="text-muted">Hubungi kami untuk pertanyaan, saran, atau kerja sama terkait Sistem Informasi Produk Hukum Desa.</p>
+            </div>
+
+            <div class="row align-items-center">
+                <!-- Contact Info -->
+                <div class="col-lg-5 mb-4 mb-lg-0">
+                    <div class="contact-info wow fadeInLeft" data-wow-delay=".3s">
+                        <h5 class="fw-bold mb-3">Informasi Kontak</h5>
+                        <p class="text-muted mb-2"><i class="lni lni-map-marker me-2 text-primary"></i>Jl. Rowo Sari No. 10, Kecamatan Rumbai, Kabupaten Rumbai</p>
+                        <p class="text-muted mb-2"><i class="lni lni-envelope me-2 text-primary"></i>bina.desa@example.com</p>
+                        <p class="text-muted mb-2"><i class="lni lni-phone me-2 text-primary"></i>+62 81267498272</p>
+                        <p class="text-muted"><i class="lni lni-timer me-2 text-primary"></i>Senin - Jumat, 08.00 - 16.00 WIB</p>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="col-lg-7">
+                    <div class="contact-form wow fadeInRight" data-wow-delay=".4s">
+                        <form action="" method="POST">
+                            @csrf
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <input type="text" name="nama" class="form-control" placeholder="Nama Lengkap" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="email" name="email" class="form-control" placeholder="Alamat Email" required>
+                                </div>
+                                <div class="col-12">
+                                    <input type="text" name="subjek" class="form-control" placeholder="Subjek Pesan" required>
+                                </div>
+                                <div class="col-12">
+                                    <textarea name="pesan" rows="5" class="form-control" placeholder="Tulis pesan Anda di sini..." required></textarea>
+                                </div>
+                                <div class="col-12 text-end">
+                                    <button type="submit" class="main-btn btn-hover">Kirim Pesan</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
 @endsection

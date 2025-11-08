@@ -13,7 +13,7 @@ class UserController extends Controller
     public function index()
     {
         $data['dataUser'] = User::all();
-        return view('guest.user.data-user', $data);
+        return view('pages.user.index', $data);
 
     }
 
@@ -22,7 +22,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('guest.user.create-user');
+        return view('pages.user.create');
     }
 
     /**
@@ -56,7 +56,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::findOrFail($id);
-        return view('guest.user.edit-user', compact('user'));
+        return view('pages.user.edit', compact('user'));
     }
 
     public function update(Request $request, $id)

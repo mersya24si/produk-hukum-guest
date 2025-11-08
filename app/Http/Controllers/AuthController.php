@@ -14,7 +14,7 @@ class AuthController extends Controller
      */
     public function index()
     {
-        return view('guest.auth.logform');
+        return view('pages.auth.login');
     }
 
     /**
@@ -22,7 +22,7 @@ class AuthController extends Controller
      */
     public function create()
     {
-        return view('guest.auth.register');
+        return view('pages.auth.register');
     }
 
     /**

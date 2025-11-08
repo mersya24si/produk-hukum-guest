@@ -11,8 +11,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JenisDokumenController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
-Route::get('/auth', function () {
-    return view('welcome');
+Route::get('/', function () {
+    return view('pages.dashboard');
 });
 
 Route::resource('auth', AuthController::class);
