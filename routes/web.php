@@ -8,6 +8,7 @@ use App\Http\Controllers\WargaController;
 use App\Http\Controllers\LayananController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DokumenHukumController;
 use App\Http\Controllers\JenisDokumenController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -20,6 +21,8 @@ Route::resource('kategori', KategoriController::class);
 Route::resource('warga', WargaController::class);
 Route::resource('dashboard', DashboardController::class);
 Route::resource('user', UserController::class);
+Route::resource('jenisdokumen', JenisDokumenController::class);
+Route::resource('dokumenhukum', DokumenHukumController::class);
 
 
 

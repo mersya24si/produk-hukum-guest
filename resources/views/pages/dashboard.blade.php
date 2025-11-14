@@ -101,6 +101,29 @@
                         <a href="{{ route('kategori.index') }}" class="main-btn btn-hover">Buka</a>
                     </div>
                 </div>
+                <div class="row g-4">
+                <!-- Card 4 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card shadow-sm border-0 h-100 text-center p-4 wow fadeInUp" data-wow-delay=".2s">
+                        <div class="icon mb-3 text-primary">
+                            <i class="lni lni-users" style="font-size:40px;"></i>
+                        </div>
+                        <h5 class="fw-bold mb-2">Jenis Dokumen</h5>
+                        <p class="text-muted mb-3">Datakan Jenis Dokumen Anda disini.</p>
+                        <a href="{{ route('jenisdokumen.index') }}" class="main-btn btn-hover">Buka</a>
+                    </div>
+                </div>
+                <!-- Card 5 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card shadow-sm border-0 h-100 text-center p-4 wow fadeInUp" data-wow-delay=".2s">
+                        <div class="icon mb-3 text-primary">
+                            <i class="lni lni-users" style="font-size:40px;"></i>
+                        </div>
+                        <h5 class="fw-bold mb-2">Dokumen Hukum</h5>
+                        <p class="text-muted mb-3">Dokumen Hukum Bina Desa.</p>
+                        <a href="{{ route('dokumenhukum.index') }}" class="main-btn btn-hover">Buka</a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
