@@ -7,54 +7,89 @@
             <h2 class="fw-bold">Data Warga Desa</h2>
             <p class="text-muted">Berikut adalah daftar warga yang telah terdaftar dalam sistem Bina Desa.</p>
         </div>
-
-        {{-- ✅ Notifikasi sukses --}}
-        @if (session('success'))
-            <div class="alert alert-success text-center">
-                {{ session('success') }}
-            </div>
-        @endif
-
-        {{-- ✅ Jika data ada --}}
-        @if (!$dataWarga->isEmpty())
-            <div class="row g-4">
-                @foreach ($dataWarga as $item)
-                    <div class="col-md-4 col-sm-6">
-                        <div class="card shadow-sm border-0 rounded-4 h-100">
-                            <div class="card-body">
-                                <h5 class="card-title fw-bold">{{ $item->nama }}</h5>
-                                <p class="card-text mb-1"><strong>No. KTP:</strong> {{ $item->no_ktp }}</p>
-                                <p class="card-text mb-1"><strong>Jenis Kelamin:</strong> {{ $item->jenis_kelamin }}</p>
-                                <p class="card-text mb-1"><strong>Agama:</strong> {{ $item->agama }}</p>
-                                <p class="card-text mb-1"><strong>Pekerjaan:</strong> {{ $item->pekerjaan }}</p>
-                                <p class="card-text mb-1"><strong>Telepon:</strong> {{ $item->telp }}</p>
-                                <p class="card-text mb-0"><strong>Email:</strong> {{ $item->email }}</p>
-                            </div>
-                            <div class="mt-3 d-flex justify-content-between">
-                                <a href="{{ route('warga.edit', $item->warga_id) }}" class="btn btn-warning btn-sm">Edit</a>
-
-                                <form action="{{ route('warga.destroy', $item->warga_id) }}" method="POST"
-                                    onsubmit="return confirm('Yakin hapus data ini?')">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
-                                </form>
-                            </div>
+        <div class="table-responsive">
+            <form method="GET" action="{{ route('warga.index') }}" class="mb-3">
+                <div class="row">
+                    <div class="col-md-2">
+                        <select name="jenis_kelamin" class="form-select" onchange="this.form.submit()">
+                            <option value="">All</option>
+                            <option value="Laki-laki" {{ request('jenis_kelamin') == 'Laki-laki' ? 'selected' : '' }}>
+                                Laki-laki
+                            </option>
+                            <option value="Perempuan" {{ request('jenis_kelamin') == 'Perempuan' ? 'selected' : '' }}>
+                                Perempuan</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <input type="text" name="search" class="form-control" id="exampleInputIconRight"
+                                value="{{ request('search') }}" placeholder="Search" aria-label="Search">
+                            <button type="submit" class="input-group-text" id="basic-addon2">
+                                <svg class="icon icon-xxs" fill="currentColor" viewBox="0 0 20 20"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                            </button>
+                            @if (request('search'))
+                                <a href="{{ request()->fullUrlWithQuery(['search' => null]) }}"
+                                    class="btn btn-outline-secondary ml-3" id="clear-search"> Clear</a>
+                            @endif
                         </div>
                     </div>
-                @endforeach
-            </div>
-        @else
-            {{-- ✅ Jika data kosong --}}
-            <div class="text-center text-muted mt-4">
-                <p>Belum ada data warga yang dimasukkan.</p>
-            </div>
-        @endif
+                </div>
+            </form>
 
-        <div class="text-end mt-4">
-            <a href="{{ route('warga.create') }}" class="btn btn-primary shadow-sm rounded-pill px-4 py-2">
-                + Tambah Data Warga
-            </a>
+            {{-- ✅ Notifikasi sukses --}}
+            @if (session('success'))
+                <div class="alert alert-success text-center">
+                    {{ session('success') }}
+                </div>
+            @endif
+
+            {{-- ✅ Jika data ada --}}
+            @if (!$dataWarga->isEmpty())
+                <div class="row g-4">
+                    @foreach ($dataWarga as $item)
+                        <div class="col-md-4 col-sm-6">
+                            <div class="card shadow-sm border-0 rounded-4 h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title fw-bold">{{ $item->nama }}</h5>
+                                    <p class="card-text mb-1"><strong>No. KTP:</strong> {{ $item->no_ktp }}</p>
+                                    <p class="card-text mb-1"><strong>Jenis Kelamin:</strong> {{ $item->jenis_kelamin }}</p>
+                                    <p class="card-text mb-1"><strong>Agama:</strong> {{ $item->agama }}</p>
+                                    <p class="card-text mb-1"><strong>Pekerjaan:</strong> {{ $item->pekerjaan }}</p>
+                                    <p class="card-text mb-1"><strong>Telepon:</strong> {{ $item->telp }}</p>
+                                    <p class="card-text mb-0"><strong>Email:</strong> {{ $item->email }}</p>
+                                </div>
+                                <div class="mt-3 d-flex justify-content-between">
+                                    <a href="{{ route('warga.edit', $item->warga_id) }}"
+                                        class="btn btn-warning btn-sm">Edit</a>
+
+                                    <form action="{{ route('warga.destroy', $item->warga_id) }}" method="POST"
+                                        onsubmit="return confirm('Yakin hapus data ini?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            @else
+                {{-- ✅ Jika data kosong --}}
+                <div class="text-center text-muted mt-4">
+                    <p>Belum ada data warga yang dimasukkan.</p>
+                </div>
+            @endif
+
+            <div class="text-end mt-4">
+                <a href="{{ route('warga.create') }}" class="btn btn-primary shadow-sm rounded-pill px-4 py-2">
+                    + Tambah Data Warga
+                </a>
+            </div>
         </div>
     </main>
 
