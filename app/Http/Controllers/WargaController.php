@@ -16,7 +16,7 @@ class WargaController extends Controller
         $searchableColumns = ['no_ktp','nama','telp','email'];
         $data['dataWarga'] = Warga::filter($request,$filterableColumns)
                                     ->search($request, $searchableColumns)
-                                    ->simplePaginate(10)->onEachSide(2) ;
+                                    ->simplePaginate(12)->onEachSide(2) ;
 		return view('pages.warga.index',$data);
 
     }

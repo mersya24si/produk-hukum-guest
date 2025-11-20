@@ -78,6 +78,9 @@
                         </div>
                     @endforeach
                 </div>
+                <div class="mt-3">
+                    {{ $dataWarga->links('pagination::simple-bootstrap-5') }}
+                </div>
             @else
                 {{-- ✅ Jika data kosong --}}
                 <div class="text-center text-muted mt-4">
