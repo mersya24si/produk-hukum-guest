@@ -15,7 +15,7 @@ class CreateJenisDokumenDummy extends Seeder
     {
          $faker = Faker::create('id_ID');
 
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < 100; $i++) {
             DB::table('jenisdokumen')->insert([
                 'nama_jenis' => $faker->randomElement([
                     'Sertifikat Hak Milik',
