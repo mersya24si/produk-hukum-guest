@@ -12,11 +12,19 @@ class DokumenHukumController extends Controller
     /**
      * Menampilkan semua data dokumen hukum.
      */
-    public function index()
-    {
-        $dokumen = DokumenHukum::with(['jenis', 'kategori'])->get();
-        return view('pages.dokumenhukum.index', compact('dokumen'));
-    }
+    public function index(Request $request)
+{
+    $filterableColumns = ['status'];
+    $searchableColumns = ['judul', 'nomor', 'tanggal'];
+
+    $dokumen = DokumenHukum::with(['jenis', 'kategori'])
+        ->filter($request, $filterableColumns)
+        ->search($request, $searchableColumns)
+        ->paginate(12)
+        ->onEachSide(2);
+
+    return view('pages.dokumenhukum.index', compact('dokumen'));
+}
 
     /**
      * Form untuk membuat dokumen baru.
