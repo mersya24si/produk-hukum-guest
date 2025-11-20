@@ -10,10 +10,13 @@ class KategoriController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data['dataKategori'] = Kategori::all();
-		return view('pages.kategori.index',$data);
+        $searchableColumns = ['nama', 'deskripsi'];
+        $data['dataKategori']  = Kategori::search($request, $searchableColumns)->simplePaginate(12)
+            ->onEachSide(2);
+        return view('pages.kategori.index', $data);
+
     }
 
     /**
