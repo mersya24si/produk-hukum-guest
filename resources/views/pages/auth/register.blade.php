@@ -1,4 +1,4 @@
-@extends('layouts.admin.applog')
+@extends('layouts.auth.app')
 @section('content')
     <div class="card p-4">
         <h3 class="text-center mb-3">Registrasi</h3>
