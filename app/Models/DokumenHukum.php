@@ -60,4 +60,11 @@ class DokumenHukum extends Model
             });
         }
     }
+
+    public function attachments()
+    {
+        return $this->hasMany(Media::class, 'ref_id', 'dokumen_id')
+                    ->where('ref_table', 'dokumen_hukum')
+                    ->orderBy('sort_order', 'asc');
+    }
 }

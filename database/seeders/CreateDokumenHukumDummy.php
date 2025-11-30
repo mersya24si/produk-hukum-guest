@@ -26,7 +26,7 @@ class CreateDokumenHukumDummy extends Seeder
             return;
         }
 
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < 100; $i++) {
             DB::table('dokumen_hukum')->insert([
                 'jenis_id'      => $faker->randomElement($jenisIDs),
                 'kategori_id'   => $faker->randomElement($kategoriIDs),

@@ -12,7 +12,8 @@
             <div class="col-lg-8">
 
                 <div class="card shadow border-0 p-4">
-                    <form action="{{ route('dokumenhukum.store') }}" method="POST">
+                    {{-- PERUBAHAN 1: Tambahkan enctype="multipart/form-data" --}}
+                    <form action="{{ route('dokumenhukum.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
 
                         <div class="mb-3">
@@ -62,6 +63,15 @@
                                 <option value="ditolak">Ditolak</option>
                                 <option value="diterima">Diterima</option>
                             </select>
+                        </div>
+
+                        {{-- PERUBAHAN 2: Input File Upload --}}
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Upload Lampiran (PDF/Gambar)</label>
+                            <input type="file" name="files[]" class="form-control" multiple>
+                            <div class="form-text text-muted">
+                                Bisa pilih banyak file sekaligus. Format: PDF, JPG, PNG. Maks 10MB per file.
+                            </div>
                         </div>
 
                         <div class="text-center">

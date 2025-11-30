@@ -23,7 +23,8 @@ Route::resource('dashboard', DashboardController::class);
 Route::resource('user', UserController::class);
 Route::resource('jenisdokumen', JenisDokumenController::class);
 Route::resource('dokumenhukum', DokumenHukumController::class);
-
+Route::delete('/dokumenhukum/media/{id}', [DokumenHukumController::class, 'deleteMedia'])
+         ->name('dokumenhukum.deleteMedia');
 
 
 Route::get('/auth', [AuthController::class, 'index'])->name('auth.index');
