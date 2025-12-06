@@ -14,6 +14,9 @@ class AuthController extends Controller
      */
     public function index()
     {
+        if (Auth::check()) {
+		      return redirect()->route('dashboard.index');
+		}
         return view('pages.auth.login');
     }
 
@@ -59,6 +62,7 @@ class AuthController extends Controller
             $request->validate([
                 'name' => 'required|string|max:50',
                 'email' => 'required|email|unique:users',
+                'role' => 'required|in:Admin,Warga',
                 'password' => [
                     'required',
                     'min:3',
@@ -70,6 +74,8 @@ class AuthController extends Controller
                 'email.required' => 'Email wajib diisi',
                 'email.email' => 'Format email tidak valid',
                 'email.unique' => 'Email sudah digunakan',
+                'role.required' => 'Role wajib dipilih',
+                'role.in' => 'Role tidak valid',
                 'password.required' => 'Password wajib diisi',
                 'password.min' => 'Password minimal 3 karakter',
                 'password.regex' => 'Password harus mengandung minimal satu huruf kapital',
@@ -80,6 +86,7 @@ class AuthController extends Controller
             User::create([
                 'name' => $request->name,
                 'email' => $request->email,
+                'role' => $request->role,
                 'password' => Hash::make($request->password),
             ]);
 

@@ -1,80 +1,109 @@
 @extends('layouts.guest.app')
+
 @section('content')
-    <!-- ========================= HERO SECTION ========================= -->
     <br><br>
     <main class="container my-5" id="kategori">
+
         <div class="text-center mb-4">
             <h2 class="fw-bold">Data Kategori Produk Hukum</h2>
             <p class="text-muted">Berikut adalah daftar kategori yang telah terdaftar dalam sistem Bina Desa.</p>
         </div>
+
         <div class="table-responsive">
-            <form method="GET" action="{{ route('kategori.index') }}" class="mb-3">
-                <div class="row">
-                    <div class="col-md-3">
+            <form method="GET" action="{{ route('kategori.index') }}" class="mb-4">
+                <div class="row align-items-end">
+
+                    {{-- Search Input --}}
+                    <div class="col-md-5 col-lg-4">
+                        <label for="search_input" class="form-label visually-hidden">Cari Kategori</label>
                         <div class="input-group">
-                            <input type="text" name="search" class="form-control" id="exampleInputIconRight"
-                                value="{{ request('search') }}" placeholder="Search" aria-label="Search">
-                            <button type="submit" class="input-group-text" id="basic-addon2">
-                                <svg class="icon icon-xxs" fill="currentColor" viewBox="0 0 20 20"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd"
-                                        d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                                        clip-rule="evenodd"></path>
+                            <input type="text" name="search" class="form-control" id="search_input"
+                                value="{{ request('search') }}" placeholder="Cari Nama Kategori" aria-label="Search">
+
+                            @if (request('search'))
+                                {{-- Tombol Clear Search (Jika ada pencarian aktif) --}}
+                                <a href="{{ route('kategori.index', request()->except('search', 'page')) }}"
+                                    class="btn btn-outline-secondary" title="Hapus Pencarian">
+                                    &times;
+                                </a>
+                            @endif
+
+                            {{-- Tombol Submit Search (Menggunakan ikon Bootstrap) --}}
+                            <button type="submit" class="btn btn-primary" title="Cari">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
                                 </svg>
                             </button>
-                            @if (request('search'))
-                                <a href="{{ request()->fullUrlWithQuery(['search' => null]) }}"
-                                    class="btn btn-outline-secondary ml-3" id="clear-search"> Clear</a>
-                            @endif
                         </div>
                     </div>
                 </div>
             </form>
-            <div>
-                @if (session('success'))
-                    <div class="alert alert-success">
-                        {{ session('success') }}
-                    </div>
-                @endif
-            </div>
 
-            @if ($dataKategori->isEmpty())
-                <div class="text-center text-muted my-5">
-                    Belum ada kategori yang dimasukkan.
+            {{-- Notifikasi Sukses --}}
+            @if (session('success'))
+                <div class="alert alert-success text-center mb-4">
+                    {{ session('success') }}
                 </div>
-            @else
+            @endif
+
+
+            {{-- Daftar Kartu Kategori --}}
+            @if (!$dataKategori->isEmpty())
                 <div class="row g-4">
                     @foreach ($dataKategori as $item)
                         <div class="col-md-4 col-sm-6">
-                            <div class="card shadow-sm border-0 h-100">
+                            <div class="card shadow-sm border-0 rounded-4 h-100">
                                 <div class="card-body">
-                                    <h5 class="card-title fw-bold text-primary">{{ $item->nama }}</h5>
-                                    <p class="card-text text-muted">{{ $item->deskripsi ?: 'Tidak ada deskripsi.' }}</p>
-                                    <div class="mt-3 d-flex justify-content-between">
-                                        <a href="{{ route('kategori.edit', $item->kategori_id) }}"
-                                            class="btn btn-warning btn-sm">Edit</a>
-
-                                        <form action="{{ route('kategori.destroy', $item->kategori_id) }}" method="POST"
-                                            onsubmit="return confirm('Yakin hapus data ini?')">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
-                                        </form>
-                                    </div>
+                                    <h5 class="card-title fw-bold text-primary mb-2">
+                                        <i class="fas fa-folder me-2"></i> {{ $item->nama }}
+                                    </h5>
+                                    <p class="card-text text-muted">
+                                        {{ $item->deskripsi ?: 'Tidak ada deskripsi yang tersedia untuk kategori ini.' }}
+                                    </p>
                                 </div>
 
+                                {{-- Tombol Aksi Admin --}}
+                            @if (Auth::check() && Auth::user()->role === 'Admin')
+                                <div class="card-footer bg-light border-top d-flex justify-content-between p-3">
+                                    <a href="{{ route('kategori.edit', $item->kategori_id) }}"
+                                        class="btn btn-warning btn-sm flex-fill me-2">
+                                        <i class="fas fa-edit me-1"></i> Edit
+                                    </a>
+
+                                    <form action="{{ route('kategori.destroy', $item->kategori_id) }}" method="POST"
+                                        onsubmit="return confirm('Yakin hapus kategori {{ $item->nama }}? Tindakan ini tidak dapat dibatalkan.')"
+                                        class="flex-fill">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm w-100">
+                                            <i class="fas fa-trash me-1"></i> Hapus
+                                        </button>
+                                    </form>
+                                </div>
+                            @endif
                             </div>
                         </div>
                     @endforeach
                 </div>
-                <div class="mt-3">
-                {{ $dataKategori->links('pagination::simple-bootstrap-5') }}
-            </div>
+
+                {{-- Paginasi --}}
+                <div class="mt-4 d-flex justify-content-center">
+                    {{ $dataKategori->links('pagination::simple-bootstrap-5') }}
+                </div>
+
+            @else
+                {{-- Jika data kosong --}}
+                <div class="alert alert-info text-center mt-4">
+                    <p class="mb-0">Tidak ada kategori produk hukum yang ditemukan.</p>
+                </div>
             @endif
 
-            <div class="text-end mt-4">
-                <a href="{{ route('kategori.create') }}" class="btn btn-primary btn-hover">+ Tambah Kategori</a>
+            <div class="text-end mt-5">
+                <a href="{{ route('kategori.create') }}" class="btn btn-success shadow-lg rounded-pill px-4 py-2">
+                    <i class="fas fa-plus me-1"></i> Tambah Kategori
+                </a>
             </div>
+
         </div>
     </main>
 
