@@ -82,7 +82,7 @@
                                 </div>
 
                                 {{-- Tombol Aksi Admin --}}
-                                
+                                @if (Auth::check() && Auth::user()->role === 'Admin')
                                     <div class="card-footer bg-light border-top d-flex justify-content-between p-3">
                                         <a href="{{ route('warga.edit', $item->warga_id) }}"
                                             class="btn btn-warning btn-sm flex-fill me-2">
@@ -117,14 +117,13 @@
             @endif
 
 
-                <div class="text-end mt-5">
-                    <a href="{{ route('warga.create') }}" class="btn btn-success shadow-lg rounded-pill px-4 py-2">
-                        <i class="fas fa-plus me-1"></i> Tambah Data Warga
-                    </a>
-                </div>
+            <div class="text-end mt-5">
+                <a href="{{ route('warga.create') }}" class="btn btn-success shadow-lg rounded-pill px-4 py-2">
+                    <i class="fas fa-plus me-1"></i> Tambah Data Warga
+                </a>
+            </div>
             @endif
 
         </div>
     </main>
-
 @endsection
