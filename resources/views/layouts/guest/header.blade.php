@@ -4,7 +4,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-12">
                     <nav class="navbar navbar-expand-lg"> <a class="navbar-brand" href="{{ route('dashboard.index') }}">
-                            <img src="{{ asset('assets/assets-guest/img/about/logo_about.png') }}" alt="Logo"
+                            <img src="{{ asset('assets/assets-guest/img/about/logo.png') }}" alt="Logo"
                                 width="60" style="height: auto;" /> </a> <button class="navbar-toggler"
                             type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

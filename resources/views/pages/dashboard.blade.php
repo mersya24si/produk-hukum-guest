@@ -37,7 +37,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-6 mb-4 mb-lg-0">
                     <div class="about-img wow fadeInLeft" data-wow-delay=".3s">
-                        <img src="{{ asset('assets/assets-guest/img/about/logo_about.png') }}"
+                        <img src="{{ asset('assets/assets-guest/img/about/logo.png') }}"
                             alt="Tentang Produk Hukum Desa" class="img-fluid rounded">
                     </div>
                 </div>

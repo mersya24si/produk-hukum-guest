@@ -4,6 +4,12 @@
     <br><br>
     <main class="container my-5" id="warga">
 
+        <div class="mb-4">
+            <a href="{{ url('/dashboard#layanan') }}" class="btn btn-secondary rounded-pill px-4">
+                <i class="fas fa-arrow-left me-1"></i> Kembali ke Layanan
+            </a>
+        </div>
+
         <div class="text-center mb-4">
             <h2 class="fw-bold">Data Warga Desa</h2>
             <p class="text-muted">Berikut adalah daftar warga yang telah terdaftar dalam sistem Bina Desa.</p>
@@ -122,7 +128,7 @@
                     <i class="fas fa-plus me-1"></i> Tambah Data Warga
                 </a>
             </div>
-           
+
 
         </div>
     </main>

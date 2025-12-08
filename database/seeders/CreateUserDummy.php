@@ -15,9 +15,13 @@ class CreateUserDummy extends Seeder
      */
     public function run(): void
     {
-         $faker = Factory::create();
+        // Menggunakan locale Indonesia
+        $faker = Factory::create('id_ID');
 
-        foreach (range(1, 100) as $index) {
+        // Membuat 30–100 data dummy secara acak
+        $jumlahData = rand(30, 100);
+
+        foreach (range(1, $JumlahData) as $index) {
             DB::table('users')->insert([
                 'name'     => $faker->name,
                 'email'    => $faker->unique()->safeEmail,
