@@ -1,52 +1,79 @@
 @extends('layouts.guest.app')
+
 @section('content')
-    <!-- ========================= HERO SECTION ========================= -->
-    <section id="form" class="pt-100 pb-100 bg-light">
+    <br><br>
+
+    <section id="form-input-user" class="pt-100 pb-100 bg-light">
         <div class="container">
-            <div class="section-title text-center mb-5">
-                <h2 class="fw-bold">Form Input User</h2>
+
+            <div class="mb-4">
+                <a href="{{ route('user.index') }}" class="btn btn-secondary rounded-pill px-4">
+                    <i class="lni lni-arrow-left me-1"></i> Kembali ke Daftar User
+                </a>
+            </div>
+
+            <div class="section-title text-center mb-5 border-bottom pb-3">
+                <h2 class="fw-bold text-logo-accent">Form Input User</h2>
                 <p class="text-muted">Isi data berikut untuk menambahkan User baru ke sistem Bina Desa.</p>
             </div>
 
             <div class="row justify-content-center">
                 <div class="col-lg-8">
-                    <div class="card shadow border-0 p-4">
+                    <div class="card border-0 p-5 service-card-hover rounded-4">
+
                         <form action="{{ route('user.store') }}" method="POST">
                             @csrf
-                            <div class="mb-3">
-                                <label for="name" class="form-label fw-bold">Nama Lengkap</label>
-                                <input type="text" name="name" id="name" class="form-control"
-                                    placeholder="Masukkan Name" value="{{ old('name') }}" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="email" class="form-label fw-bold">Email</label>
-                                <input type="email" name="email" id="email" class="form-control"
-                                    placeholder="Masukkan Email" value="{{ old('email') }}" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="role" class="form-label">Role</label>
-                                <select id="role" name="role" class="form-select">
-                                    <option value="">-- Pilih --</option>
-                                    <option value="Admin" {{ old('role') == 'Admin' ? 'selected' : '' }}>Admin</option>
-                                    <option value="Warga" {{ old('role') == 'Warga' ? 'selected' : '' }}>Warga</option>
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label for="password" class="form-label fw-bold">Password</label>
-                                <input type="password" name="password" id="password" class="form-control"
-                                    placeholder="Masukkan password" value="{{ old('password') }}" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="konfirmasi-password" class="form-label fw-bold">Konfirmasi Password</label>
-                                <input type="password" name="konfirmasi-password" id="konfirmasi-password"
-                                    class="form-control" placeholder="Masukkan konfirmasi password"
-                                    value="{{ old('konfirmasi-password') }}" required>
-                            </div>
-                            <div class="text-center">
-                                <button type="submit" class="main-btn btn-hover">Simpan Data</button>
-                                <button type="reset" class="main-btn btn-outline-secondary ms-2">Reset</button>
-                            </div>
 
+                            <div class="row g-4">
+
+                                <div class="col-12">
+                                    <label for="name" class="form-label fw-bold">Nama Lengkap</label>
+                                    <input type="text" name="name" id="name" class="form-control rounded-pill"
+                                        placeholder="Masukkan Nama Lengkap" value="{{ old('name') }}" required>
+                                    @error('name') <div class="text-danger small mt-1">{{ $message }}</div> @enderror
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="email" class="form-label fw-bold">Email</label>
+                                    <input type="email" name="email" id="email" class="form-control rounded-pill"
+                                        placeholder="Masukkan Email" value="{{ old('email') }}" required>
+                                    @error('email') <div class="text-danger small mt-1">{{ $message }}</div> @enderror
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="role" class="form-label fw-bold">Role Pengguna</label>
+                                    <select id="role" name="role" class="form-select rounded-pill" required>
+                                        <option value="">-- Pilih Role --</option>
+                                        <option value="Admin" {{ old('role') == 'Admin' ? 'selected' : '' }}>Admin</option>
+                                        <option value="Warga" {{ old('role') == 'Warga' ? 'selected' : '' }}>Warga</option>
+                                    </select>
+                                    @error('role') <div class="text-danger small mt-1">{{ $message }}</div> @enderror
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="password" class="form-label fw-bold">Password</label>
+                                    <input type="password" name="password" id="password" class="form-control rounded-pill"
+                                        placeholder="Masukkan Password" required>
+                                    @error('password') <div class="text-danger small mt-1">{{ $message }}</div> @enderror
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="password_confirmation" class="form-label fw-bold">Konfirmasi Password</label>
+                                    <input type="password" name="password_confirmation" id="password_confirmation"
+                                        class="form-control rounded-pill" placeholder="Ulangi Password" required>
+                                    @error('konfirmasi-password') <div class="text-danger small mt-1">{{ $message }}</div> @enderror
+                                </div>
+
+                                <div class="col-12 d-flex justify-content-end mt-4">
+                                    <button type="submit" class="btn btn-logo-primary btn-hover rounded-pill px-4 me-2">
+                                        <i class="lni lni-save me-1"></i> Simpan User
+                                    </button>
+                                    <button type="reset" class="btn btn-outline-secondary rounded-pill px-4">
+                                        Reset
+                                    </button>
+                                </div>
+
+                            </div>
                         </form>
                     </div>
                 </div>
