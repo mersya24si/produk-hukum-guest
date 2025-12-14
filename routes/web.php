@@ -1,13 +1,15 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\WargaController;
+use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DokumenHukumController;
 use App\Http\Controllers\JenisDokumenController;
-use App\Http\Controllers\KategoriController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\WargaController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LampiranDokumenController;
+use App\Http\Controllers\RiwayatPerubahanController;
 
 Route::get('/', function () {
     return view('pages.dashboard');
@@ -21,6 +23,7 @@ Route::group(['middleware' => ['checkislogin']], function () {
 
     //Route Untuk Admin
     Route::group(['middleware' => ['checkrole:Admin']], function () {
+        Route::resource('riwayat', RiwayatPerubahanController::class);
         Route::resource('kategori', KategoriController::class);
         Route::resource('warga', WargaController::class);
         Route::resource('user', UserController::class);
@@ -28,21 +31,23 @@ Route::group(['middleware' => ['checkislogin']], function () {
         Route::delete('/dokumenhukum/media/{id}', [DokumenHukumController::class, 'deleteMedia'])
             ->name('dokumenhukum.deleteMedia');
         Route::resource('dokumenhukum', DokumenHukumController::class);
+        Route::delete('lampirandokumen/media/{id}', [LampiranDokumenController::class, 'deleteMedia'])->name('lampirandokumen.media.destroy');
+        Route::resource('lampirandokumen', LampiranDokumenController::class);
+
     });
     Route::group(['middleware' => ['checkrole:Admin,Warga']], function () {
 // List Route yang ingin diterapkan
-        Route::resource('kategori', KategoriController::class)->only(['index','show','create','store']);
-        Route::resource('warga', WargaController::class)->only(['index','show','create','store']);
-        Route::resource('user', UserController::class)->only(['index','show','create','store']);
-        Route::resource('jenisdokumen', JenisDokumenController::class)->only(['index','show','create','store']);
-        Route::resource('dokumenhukum', DokumenHukumController::class)->only(['index','show','create','store']);
+        Route::resource('kategori', KategoriController::class)->only(['index', 'show', 'create', 'store']);
+        Route::resource('warga', WargaController::class)->only(['index', 'show', 'create', 'store']);
+        Route::resource('user', UserController::class)->only(['index', 'show', 'create', 'store']);
+        Route::resource('jenisdokumen', JenisDokumenController::class)->only(['index', 'show', 'create', 'store']);
+        Route::resource('dokumenhukum', DokumenHukumController::class)->only(['index', 'show', 'create', 'store']);
+        Route::resource('riwayat', RiwayatPerubahanController::class)->only(['index', 'show', 'create', 'store']);
+        Route::resource('lampirandokumen', LampiranDokumenController::class)->only(['index', 'show', 'create', 'store']);
 
     });
 
-
-
 });
 
-
-    Route::get('/auth', [AuthController::class, 'index'])->name('auth.index');
-    Route::post('/auth/store', [AuthController::class, 'store'])->name('auth.store');
+Route::get('/auth', [AuthController::class, 'index'])->name('auth.index');
+Route::post('/auth/store', [AuthController::class, 'store'])->name('auth.store');

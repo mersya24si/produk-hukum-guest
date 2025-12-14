@@ -1,6 +1,5 @@
 @extends('layouts.guest.app')
 @section('content')
-
     <section id="home" class="hero-section pb-5">
         <div class="container">
             @if (session('success'))
@@ -13,7 +12,8 @@
             <div class="row align-items-center">
                 <div class="col-lg-6">
                     <div class="hero-content">
-                        <span class="wow fadeInLeft text-logo-accent fw-bold" data-wow-delay=".2s">Selamat Datang Di Layanan Produk Hukum</span>
+                        <span class="wow fadeInLeft text-logo-accent fw-bold" data-wow-delay=".2s">Selamat Datang Di Layanan
+                            Produk Hukum</span>
                         <h1 class="wow fadeInUp" data-wow-delay=".4s">Sistem Informasi Produk Hukum Desa</h1>
                         <p class="wow fadeInUp" data-wow-delay=".6s">
                             Platform digital untuk pengelolaan, publikasi, dan dokumentasi produk hukum desa secara
@@ -139,6 +139,24 @@
                             'desc' => 'Dokumen Hukum Bina Desa.',
                             'route' => route('dokumenhukum.index'),
                         ],
+                        // START: Penambahan baru
+                        [
+                            'icon' => 'lni lni-history', // Ikon untuk Riwayat
+                            'color' => 'text-secondary', // Warna baru
+                            'title' => 'Riwayat Dokumen',
+                            'desc' => 'Lihat riwayat perubahan dan versi dokumen hukum.',
+                            // Ganti 'riwayat.index' jika rute Anda berbeda
+                            'route' => route('riwayat.index'),
+                        ],
+                        [
+                            'icon' => 'lni lni-paperclip', // Ikon untuk Lampiran
+                            'color' => 'text-primary', // Warna baru
+                            'title' => 'Lampiran Dokumen',
+                            'desc' => 'Kelola dan lihat file-file yang dilampirkan ke dokumen.',
+                            // Menggunakan rute yang telah kita buat
+                            'route' => route('lampirandokumen.index'),
+                        ],
+                        // END: Penambahan baru
                     ];
                     $delay = 0.2;
                 @endphp
