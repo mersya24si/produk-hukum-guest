@@ -4,27 +4,57 @@
 
     {{-- Style Khusus Halaman Login & Register --}}
     <style>
-        /* Mengatur body agar konten berada di tengah vertikal */
+        /* ================================================= */
+        /* VARIABEL WARNA BARU */
+        /* ================================================= */
+        :root {
+            --primary-color: #B89C5B; /* Emas Khaki */
+            --primary-dark: #A88C4B; /* Shading untuk Gradient */
+        }
+
+        /* ================================================= */
+        /* LATAR BELAKANG GAMBAR & EFEK BLUR */
+        /* ================================================= */
         body {
             height: 100vh;
             margin: 0;
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #f0f0f0;
-            /* Latar belakang abu-abu muda */
+
+            /* GANTI URL INI DENGAN PATH GAMBAR LATAR BELAKANG ANDA */
+            background-image: url('{{ asset('assets/assets-guest/img/hero/bglogin.jpg') }}');
+            background-size: cover;
+            background-position: center;
+
+            /* FILTER BLUR RINGAN */
+            position: relative;
         }
 
+        /* Pseudo-element untuk efek Blur pada body */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.4); /* Opacity Putih/Abu-abu */
+            backdrop-filter: blur(4px); /* Efek Blur 4px */
+            z-index: -1;
+        }
+
+        /* Mengatur container utama */
         .container-custom {
             background-color: #fff;
             border-radius: 20px;
-            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.35), 0 10px 10px rgba(0, 0, 0, 0.25);
             position: relative;
             overflow: hidden;
             width: 800px;
-            /* Lebar total container */
             max-width: 100%;
             min-height: 600px;
+            z-index: 1;
         }
 
         .form-container {
@@ -50,7 +80,7 @@
             z-index: 1;
         }
 
-        /* Overlay Container (Sisi Hijau) */
+        /* Overlay Container (Sisi Warna) */
         .overlay-container {
             position: absolute;
             top: 0;
@@ -64,10 +94,8 @@
 
         /* Overlay itu sendiri */
         .overlay {
-            background: #1469b8;
-            /* Warna Hijau Cyan Utama */
-            background: linear-gradient(to right, #1469b8, #1469b8);
-            /* Gradien Hijau */
+            background: var(--primary-color);
+            background: linear-gradient(to right, var(--primary-color), var(--primary-dark));
             background-repeat: no-repeat;
             background-size: cover;
             background-position: 0 0;
@@ -80,7 +108,7 @@
             transition: transform 0.6s ease-in-out;
         }
 
-        /* Panel di Sisi Hijau */
+        /* Panel di Sisi Warna */
         .overlay-panel {
             position: absolute;
             display: flex;
@@ -110,39 +138,25 @@
         /* ================================== */
         /*     EFEK PERGESERAN (THE MAGIC)    */
         /* ================================== */
-
-        /* Ketika class 'right-panel-active' ditambahkan ke container-custom */
-
-        /* 1. Container utama geser ke kiri */
         .container-custom.right-panel-active .overlay-container {
             transform: translateX(-100%);
         }
-
-        /* 2. Form Sign In geser ke kanan dan hilang (z-index 1 agar tertutup) */
         .container-custom.right-panel-active .sign-in-container {
             transform: translateX(100%);
             opacity: 0;
             z-index: 1;
         }
-
-        /* 3. Form Sign Up geser ke kanan dan muncul (z-index 5 agar terlihat) */
         .container-custom.right-panel-active .sign-up-container {
             transform: translateX(100%);
             opacity: 1;
             z-index: 5;
         }
-
-        /* 4. Overlay geser ke kanan (menampilkan panel kiri) */
         .container-custom.right-panel-active .overlay {
             transform: translateX(50%);
         }
-
-        /* 5. Panel kanan di overlay geser hilang */
         .container-custom.right-panel-active .overlay-right {
             transform: translateX(20%);
         }
-
-        /* 6. Panel kiri di overlay geser muncul */
         .container-custom.right-panel-active .overlay-left {
             transform: translateX(0);
         }
@@ -186,8 +200,8 @@
 
         .btn-custom {
             border-radius: 20px;
-            border: 1px solid #1469b8;
-            background-color: #1469b8;
+            border: 1px solid var(--primary-color);
+            background-color: var(--primary-color); /* Menggunakan warna baru */
             color: #FFFFFF;
             font-size: 12px;
             font-weight: bold;
@@ -207,46 +221,44 @@
 
 
     <div class="container-custom" id="container">
-        <div class="sign-up-container">
-        @if (session('success'))
-            <div class="alert alert-success">{{ session('success') }}</div>
-        @endif
-        @if (session('error'))
-            <div class="alert alert-danger">{{ session('error') }}</div>
-        @endif
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul class="mb-0">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-    </div>
-        {{-- ================================================== --}}
-        {{-- BAGIAN 1: FORM SIGN UP (REGISTER) - HANYA SATU INSTANCE --}}
-        {{-- ================================================== --}}
-        <div class="form-container sign-up-container">
-            <form method="POST" action="{{ route('auth.store') }}">
-                @csrf
-                <h1 class="fw-bold mb-3">Create Account</h1>
 
-                <div class="social-container mb-3">
+        {{-- KOTAK PESAN KESALAHAN/SUKSES --}}
+        <div class="form-container sign-up-container">
+            @if (session('success'))
+                <div class="alert alert-success w-100">{{ session('success') }}</div>
+            @endif
+            @if (session('error'))
+                <div class="alert alert-danger w-100">{{ session('error') }}</div>
+            @endif
+            @if ($errors->any())
+                <div class="alert alert-danger w-100">
+                    <ul class="mb-0 text-start">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            {{-- Form Register --}}
+            <form method="POST" action="{{ route('auth.store') }}" style="padding-top: 15px;">
+                @csrf
+                <h1 class="fw-bold mb-2">Buat Akun Baru</h1>
+
+                <div class="social-container mb-2">
                     <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
                     <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
                     <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
                 </div>
 
-                <span class="small text-muted mb-3">atau gunakan email Anda untuk mendaftar</span>
+                <span class="small text-muted mb-2">atau gunakan email Anda untuk mendaftar</span>
 
-                {{-- Nama Lengkap (Repopulated) --}}
+                {{-- Nama Lengkap --}}
                 <input type="text" placeholder="Nama Lengkap" name="name" value="{{ old('name') }}" required />
                 @error('name')
                     <p class="text-danger small mt-n2 mb-2">{{ $message }}</p>
                 @enderror
 
-                {{-- Email (Repopulated) --}}
+                {{-- Email --}}
                 <input type="email" placeholder="Email" name="email" value="{{ old('email') }}" required />
                 @error('email')
                     <p class="text-danger small mt-n2 mb-2">{{ $message }}</p>
@@ -264,60 +276,75 @@
                 @enderror
 
                 {{-- Password --}}
-                <input type="password" placeholder="Password" name="password" required />
+                <input type="password" placeholder="Kata Sandi" name="password" required />
                 @error('password')
                     <p class="text-danger small mt-n2 mb-2">{{ $message }}</p>
                 @enderror
 
                 {{-- Confirm Password --}}
-                <input type="password" placeholder="Confirm Password" name="password_confirmation" required />
+                <input type="password" placeholder="Konfirmasi Kata Sandi" name="password_confirmation" required />
 
-                <button type="submit" name="register" class="btn-custom mt-4">Sign Up</button>
+                <button type="submit" name="register" class="btn-custom mt-4">Daftar (Sign Up)</button>
             </form>
         </div>
 
 
 
 
+        {{-- ================================================== --}}
+        {{-- BAGIAN 2: FORM SIGN IN (LOGIN) --}}
+        {{-- ================================================== --}}
         <div class="form-container sign-in-container">
+            @if (session('success'))
+                <div class="alert alert-success w-100">{{ session('success') }}</div>
+            @endif
+            @if (session('error'))
+                <div class="alert alert-danger w-100">{{ session('error') }}</div>
+            @endif
+            @if ($errors->any())
+                <div class="alert alert-danger w-100">
+                    <ul class="mb-0 text-start">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <form method="POST" action="{{ route('auth.store') }}">
                 @csrf
-                <h1 class="fw-bold mb-3">Sign in</h1>
+                <h1 class="fw-bold mb-3">Selamat Datang</h1>
 
-                <div class="social-container mb-3">
-                    <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-                    <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-                </div>
-
-                <span class="small text-muted mb-3">atau gunakan akun Anda</span>
+                <span class="small text-muted mb-3">Layanan Produk Hukum Desa</span>
 
                 <input type="email" placeholder="Email" name="email" required />
-                <input type="password" placeholder="Password" name="password" required />
+                <input type="password" placeholder="Kata Sandi" name="password" required />
 
                 @if (Route::has('password.request'))
                     <a href="{{ route('password.request') }}" class="small text-muted mt-2 mb-4">Lupa kata sandi anda?</a>
                 @endif
 
-                <button type="submit" name="login" class="btn-custom">Sign In</button>
+                <button type="submit" name="login" class="btn-custom">Masuk (Sign In)</button>
             </form>
         </div>
 
+        {{-- ================================================== --}}
+        {{-- BAGIAN 3: OVERLAY CONTAINER (THE SLIDING PANEL) --}}
+        {{-- ================================================== --}}
         <div class="overlay-container">
             <div class="overlay">
 
-                {{-- PANEL KANAN (Muncul saat LOGIN) --}}
+                {{-- PANEL KANAN (Muncul saat LOGIN / Default) --}}
                 <div class="overlay-panel overlay-right">
-                    <h1 class="fw-bold">Halo, Teman!</h1>
-                    <p class="mt-3 mb-4">Daftarkan diri anda dan mulai gunakan layanan kami segera</p>
-                    <button class="btn-custom ghost" id="signUp">Sign Up</button>
+                    <h1 class="fw-bold">Selamat Datang!</h1>
+                    <p class="mt-3 mb-4">Belum punya akun? Daftarkan diri Anda dan nikmati semua layanan kami.</p>
+                    <button class="btn-custom ghost" id="signUp">Daftar (Sign Up)</button>
                 </div>
 
                 {{-- PANEL KIRI (Muncul saat REGISTER) --}}
                 <div class="overlay-panel overlay-left">
-                    <h1 class="fw-bold">Selamat Datang Kembali!</h1>
-                    <p class="mt-3 mb-4">Untuk tetap terhubung dengan kami, silakan login dengan akun Anda</p>
-                    <button class="btn-custom ghost" id="signIn">Sign In</button>
+                    <h1 class="fw-bold">Kembali ke Akun Anda!</h1>
+                    <p class="mt-3 mb-4">Masukkan kredensial Anda untuk tetap terhubung dan mengakses dashboard.</p>
+                    <button class="btn-custom ghost" id="signIn">Masuk (Sign In)</button>
                 </div>
             </div>
         </div>
@@ -340,8 +367,8 @@
                 container.classList.remove("right-panel-active");
             });
 
-            // Optional: Mengatur default tampilan jika ada error (Misal, error register)
-            @if ($errors->has('name') || $errors->has('email') || $errors->has('password') || session('status') == 'register_error')
+            // Optional: Mengatur default tampilan jika ada error pada form Register
+            @if ($errors->hasAny(['name', 'email', 'role', 'password']) || session('status') == 'register_error')
                 container.classList.add("right-panel-active");
             @endif
         });
