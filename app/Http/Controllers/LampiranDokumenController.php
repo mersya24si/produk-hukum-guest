@@ -32,7 +32,9 @@ class LampiranDokumenController extends Controller
     public function index(Request $request)
     {
         // Eager load relasi dokumenHukum dan attachments (Media)
+        $searchableColumns = ['dokumen_id', 'keterangan'];
         $lampiran = LampiranDokumen::with(['dokumenHukum', 'attachments'])
+            ->search($request, $searchableColumns)
             ->latest()
             ->paginate(12)
             ->onEachSide(2);

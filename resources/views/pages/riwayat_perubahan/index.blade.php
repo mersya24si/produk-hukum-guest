@@ -19,6 +19,32 @@
             <p class="text-muted">Daftar lengkap log perubahan yang tercatat pada dokumen-dokumen hukum.</p>
         </div>
 
+        <div class="mb-4">
+            {{-- Form Pencarian disederhanakan karena Lampiran Dokumen hanya punya kolom 'keterangan' --}}
+            <form method="GET" action="{{ route('riwayat.index') }}">
+                <div class="row g-3 align-items-end justify-content-center">
+                    <div class="col-md-6 col-lg-4">
+                        <label for="search_input" class="form-label small text-muted mb-1">Cari Dokumen
+                            atau Perubahan</label>
+                        <div class="input-group input-group-sm">
+                            <input type="text" name="search" id="search_input" class="form-control rounded-start-pill"
+                                value="{{ request('search') }}" placeholder="Cari berdasarkan kebutuhan"
+                                aria-label="Search">
+                            <button type="submit" class="btn btn-logo-primary" title="Cari">
+                                <i class="lni lni-search"></i>
+                            </button>
+                            @if (request('search'))
+                                <a href="{{ route('riwayat.index', request()->except('search', 'page')) }}"
+                                    class="btn btn-outline-secondary rounded-end-pill" title="Hapus Filter">
+                                    &times;
+                                </a>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
         <div class="row justify-content-center">
             <div class="col-lg-12">
 
@@ -38,23 +64,27 @@
                                     <div class="card-body">
 
                                         {{-- JUDUL RIWAYAT --}}
-                                    
+
 
                                         {{-- INFORMASI DOKUMEN TERKAIT --}}
                                         <p class="text-muted small mb-3 border-bottom pb-2">
-                                            <i class="lni lni-book me-1"></i> Dokumen: <span class="fw-bold">{{ Str::limit($item->dokumen->judul ?? 'Dokumen Dihapus', 25) }}</span>
+                                            <i class="lni lni-book me-1"></i> Dokumen: <span
+                                                class="fw-bold">{{ Str::limit($item->dokumen->judul ?? 'Dokumen Dihapus', 25) }}</span>
                                         </p>
 
                                         {{-- METADATA RIWAYAT --}}
                                         <ul class="list-unstyled small mb-3 text-muted">
-                                            <li><strong class="text-dark">Nomor Dokumen:</strong> {{ $item->dokumen->nomor ?? '-' }}</li>
+                                            <li><strong class="text-dark">Nomor Dokumen:</strong>
+                                                {{ $item->dokumen->nomor ?? '-' }}</li>
                                             <li>
                                                 <strong class="text-dark">Tanggal Perubahan:</strong>
-                                                <span class="badge bg-dark rounded-pill">{{ date('d F Y', strtotime($item->tanggal)) }}</span>
+                                                <span
+                                                    class="badge bg-dark rounded-pill">{{ date('d F Y', strtotime($item->tanggal)) }}</span>
                                             </li>
                                             <li>
                                                 <strong class="text-dark">Versi Dokumen:</strong>
-                                                <span class="badge bg-info text-white rounded-pill">{{ $item->versi ?? 'N/A' }}</span>
+                                                <span
+                                                    class="badge bg-info text-white rounded-pill">{{ $item->versi ?? 'N/A' }}</span>
                                             </li>
                                         </ul>
 
@@ -66,7 +96,8 @@
 
                                     {{-- Tombol Aksi Admin --}}
                                     @if (Auth::check() && Auth::user()->role === 'Admin')
-                                        <div class="card-footer bg-light border-top d-flex justify-content-between p-3 mt-auto">
+                                        <div
+                                            class="card-footer bg-light border-top d-flex justify-content-between p-3 mt-auto">
                                             <a href="{{ route('riwayat.edit', $item->riwayat_id) }}"
                                                 class="btn btn-warning btn-sm flex-fill me-2 rounded-pill">
                                                 <i class="lni lni-pencil"></i> Edit
@@ -101,11 +132,11 @@
                 @endif
 
                 <div class="text-end mt-5">
-                <a href="{{ route('riwayat.create') }}"
-                    class="btn btn-logo-primary shadow-lg rounded-pill px-4 py-2 btn-hover">
-                    <i class="lni lni-plus me-1"></i> Tambah Riwayat Perubahan
-                </a>
-            </div>
+                    <a href="{{ route('riwayat.create') }}"
+                        class="btn btn-logo-primary shadow-lg rounded-pill px-4 py-2 btn-hover">
+                        <i class="lni lni-plus me-1"></i> Tambah Riwayat Perubahan
+                    </a>
+                </div>
             </div>
         </div>
     </main>

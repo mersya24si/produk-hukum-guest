@@ -12,10 +12,12 @@ class RiwayatPerubahanController extends Controller
      * Menampilkan daftar riwayat perubahan.
      * (Biasanya, riwayat ditampilkan per dokumen, tapi ini versi Index global)
      */
-    public function index()
+    public function index(Request $request)
     {
         // Mengambil semua riwayat dan memuat relasi dokumen
+        $searchableColumns = ['dokumen_id','uraian_perubahan'];
         $riwayat = RiwayatPerubahan::with('dokumen')
+            ->search($request, $searchableColumns)
             ->orderBy('tanggal', 'desc')
             ->paginate(15);
 
