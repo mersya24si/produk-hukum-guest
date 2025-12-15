@@ -141,7 +141,7 @@
                         ],
                         // START: Penambahan baru
                         [
-                            'icon' => 'lni lni-history', // Ikon untuk Riwayat
+                            'icon' => 'lni lni-vector', // Ikon untuk Riwayat
                             'color' => 'text-secondary', // Warna baru
                             'title' => 'Riwayat Dokumen',
                             'desc' => 'Lihat riwayat perubahan dan versi dokumen hukum.',

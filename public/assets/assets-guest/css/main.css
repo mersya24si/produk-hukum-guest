@@ -1968,3 +1968,29 @@ html {
     scroll-padding-top: 90px;
     /* Sesuaikan dengan tinggi header Anda */
 }
+
+/* Warna Aksen Emas Khaki */
+:root {
+    --accent-color: #B89C5B;
+    --primary-color: #1469b8;
+    /* Jika ini adalah warna utama Anda */
+}
+
+/* Style untuk Floating WhatsApp Button */
+
+
+/* Style untuk Footer */
+.footer-custom {
+    background-color: #f8f9fa !important;
+    /* Latar belakang abu-abu muda */
+}
+
+.footer-custom .fw-bold {
+    color: var(--accent-color);
+    /* Nama Utama menggunakan Emas Khaki */
+}
+
+.footer-custom strong {
+    color: var(--accent-color);
+    /* Menekankan kata kunci menggunakan Emas Khaki */
+}
