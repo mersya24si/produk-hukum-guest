@@ -29,7 +29,7 @@
                         data-bs-interval="4000" data-wow-delay=".5s">
                         <div class="carousel-inner rounded shadow-lg">
                             <div class="carousel-item active">
-                                <img src="{{ asset('assets/assets-guest/img/hero/bg1.webp.') }}"
+                                <img src="{{ asset('assets/assets-guest/img/hero/bg1.jpg.') }}"
                                     class="d-block w-100 img-fluid" alt="Slide 1 - Dokumentasi Hukum"
                                     style="max-height: 450px; object-fit: contain;">
                             </div>
@@ -202,9 +202,9 @@
             <p class="text-muted mb-3">Program Studi: Sistem Informasi</p>
 
             <div>
-                <a href="#" class="mx-2 text-decoration-none text-logo-accent">LinkedIn</a>
-                <a href="#" class="mx-2 text-decoration-none text-logo-accent">GitHub</a>
-                <a href="#" class="mx-2 text-decoration-none text-logo-accent">Instagram</a>
+                <a href="https://www.linkedin.com/in/mersya-meylani-putri-94a212394/" class="mx-2 text-decoration-none text-logo-accent">LinkedIn</a>
+                <a href="https://github.com/mersya24si" class="mx-2 text-decoration-none text-logo-accent">GitHub</a>
+                <a href="https://www.instagram.com/mersyamylnip/" class="mx-2 text-decoration-none text-logo-accent">Instagram</a>
             </div>
         </div>
     </section>
