@@ -4,7 +4,7 @@
     <title>Bina Desa || Produk Hukum Desa</title>
     <meta name="description" content="Sistem Informasi Produk Hukum Desa" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/assets-guest/img/favicon.svg') }}" />
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/assets-guest/img/logo.png') }}" />
 	{{--Start CSS--}}
     <!-- ========================= CSS ========================= -->
     <link rel="stylesheet" href="{{ asset('assets/assets-guest/css/bootstrap-5.0.0-beta2.min.css') }}" />
