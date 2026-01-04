@@ -29,7 +29,7 @@
                         data-bs-interval="4000" data-wow-delay=".5s">
                         <div class="carousel-inner rounded shadow-lg">
                             <div class="carousel-item active">
-                                <img src="{{ asset('assets/assets-guest/img/hero/bg1.jpg.') }}"
+                                <img src="{{ asset('assets/assets-guest/img/hero/bg1.jpg') }}"
                                     class="d-block w-100 img-fluid" alt="Slide 1 - Dokumentasi Hukum"
                                     style="max-height: 450px; object-fit: contain;">
                             </div>
